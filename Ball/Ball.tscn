@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://big04kqdd7p64"]
+
+[ext_resource type="Script" path="res://Ball/Ball.gd" id="1_m7ply"]
+[ext_resource type="Texture2D" uid="uid://cidphaoq07lee" path="res://assets/ball.png" id="1_pnfjm"]
+[ext_resource type="AudioStream" uid="uid://dah7rdl8lbst1" path="res://assets/SoundBall1.mp3" id="3_kvvo8"]
+[ext_resource type="AudioStream" uid="uid://6mktl2uxcyig" path="res://assets/PaletaSoundF.wav" id="4_ja25d"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dl475"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cl3f"]
+
+[node name="Ball" type="CharacterBody2D"]
+position = Vector2(640, 360)
+script = ExtResource("1_m7ply")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_dl475")
+texture = ExtResource("1_pnfjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cl3f")
+
+[node name="WallSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kvvo8")
+
+[node name="PlayerSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ja25d")

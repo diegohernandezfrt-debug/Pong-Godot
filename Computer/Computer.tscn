@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://drmonyxrlap11"]
+
+[ext_resource type="Script" path="res://Computer/Computer.gd" id="1_rxs0a"]
+[ext_resource type="Texture2D" uid="uid://sn33cv6u7tho" path="res://assets/paddle-red.png" id="2_6b6fe"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_43k7u"]
+blend_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_122ft"]
+height = 102.0
+
+[node name="Computer" type="CharacterBody2D" groups=["paddle"]]
+position = Vector2(1180, 360)
+script = ExtResource("1_rxs0a")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_43k7u")
+rotation = 1.5708
+texture = ExtResource("2_6b6fe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_122ft")

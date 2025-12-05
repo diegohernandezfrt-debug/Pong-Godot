@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://su3pbgg05cdi"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_rudjn"]
+[ext_resource type="Texture2D" uid="uid://biaw1di5o3p50" path="res://assets/paddle-blue.png" id="1_sff6t"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ewkqe"]
+blend_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_122ft"]
+height = 102.0
+
+[node name="Player" type="CharacterBody2D" groups=["paddle"]]
+position = Vector2(100, 360)
+script = ExtResource("1_rudjn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ewkqe")
+rotation = 1.5708
+texture = ExtResource("1_sff6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_122ft")

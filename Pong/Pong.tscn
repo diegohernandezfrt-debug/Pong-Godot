@@ -1,0 +1,162 @@
+[gd_scene load_steps=16 format=3 uid="uid://b6sr1ovacc4f3"]
+
+[ext_resource type="Script" path="res://Pong/Pong.gd" id="1_ecepq"]
+[ext_resource type="PackedScene" uid="uid://su3pbgg05cdi" path="res://Player/Player.tscn" id="1_ukue8"]
+[ext_resource type="PackedScene" uid="uid://drmonyxrlap11" path="res://Computer/Computer.tscn" id="2_httm7"]
+[ext_resource type="PackedScene" uid="uid://big04kqdd7p64" path="res://Ball/Ball.tscn" id="3_ewwnj"]
+[ext_resource type="Texture2D" uid="uid://cuuiadr1vjuro" path="res://assets/wall-horizontal.png" id="4_kkd8k"]
+[ext_resource type="Texture2D" uid="uid://c58psmv7aj8h" path="res://assets/wall-vertical.png" id="5_whcur"]
+[ext_resource type="Texture2D" uid="uid://c8xkq4g58ntea" path="res://assets/middle-line.png" id="7_xpwdp"]
+[ext_resource type="FontFile" uid="uid://ceq1wh3tpmsb4" path="res://assets/alarm clock.ttf" id="8_1xirn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8hpte"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46ukv"]
+size = Vector2(1186, 21)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ehh0l"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idihc"]
+size = Vector2(21, 612)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku5g1"]
+font = ExtResource("8_1xirn")
+font_size = 60
+
+[sub_resource type="Environment" id="Environment_kppdl"]
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 2.0
+glow_levels/3 = 3.0
+glow_intensity = 0.2
+glow_strength = 1.5
+glow_bloom = 0.4
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1pca"]
+font_size = 80
+
+[node name="Pong" type="Node2D"]
+script = ExtResource("1_ecepq")
+
+[node name="Player" parent="." instance=ExtResource("1_ukue8")]
+
+[node name="Computer" parent="." instance=ExtResource("2_httm7")]
+
+[node name="Ball" parent="." instance=ExtResource("3_ewwnj")]
+
+[node name="TopWall" type="StaticBody2D" parent="." groups=["wall"]]
+position = Vector2(640, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+material = SubResource("CanvasItemMaterial_8hpte")
+texture = ExtResource("4_kkd8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_46ukv")
+
+[node name="BottomWall" type="StaticBody2D" parent="." groups=["wall"]]
+position = Vector2(640, 680)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
+material = SubResource("CanvasItemMaterial_ehh0l")
+texture = ExtResource("4_kkd8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_46ukv")
+
+[node name="GoalLelt" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="GoalLelt"]
+position = Vector2(55, 359)
+texture = ExtResource("5_whcur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLelt"]
+position = Vector2(54.5, 361)
+shape = SubResource("RectangleShape2D_idihc")
+
+[node name="GoalRight" type="Area2D" parent="."]
+position = Vector2(1169, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="GoalRight"]
+position = Vector2(55, 359)
+texture = ExtResource("5_whcur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight"]
+position = Vector2(54.5, 361)
+shape = SubResource("RectangleShape2D_idihc")
+
+[node name="Middle-line" type="Sprite2D" parent="."]
+position = Vector2(640, 353)
+texture = ExtResource("7_xpwdp")
+
+[node name="PlayerScore" type="Label" parent="."]
+offset_left = 551.0
+offset_top = 58.0
+offset_right = 619.0
+offset_bottom = 122.0
+text = "0"
+label_settings = SubResource("LabelSettings_ku5g1")
+horizontal_alignment = 1
+
+[node name="ComputerScore" type="Label" parent="."]
+offset_left = 669.0
+offset_top = 57.0
+offset_right = 737.0
+offset_bottom = 121.0
+text = "0"
+label_settings = SubResource("LabelSettings_ku5g1")
+horizontal_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kppdl")
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+offset_left = 46.0
+offset_top = 28.0
+offset_right = 1234.0
+offset_bottom = 690.0
+color = Color(1, 1, 1, 0.364706)
+
+[node name="BoxContainer" type="BoxContainer" parent="PauseMenu"]
+offset_left = 42.0
+offset_top = 28.0
+offset_right = 1234.0
+offset_bottom = 694.0
+
+[node name="LBLPausa" type="Label" parent="PauseMenu"]
+offset_left = 508.0
+offset_top = 114.0
+offset_right = 766.0
+offset_bottom = 224.0
+text = "PAUSA"
+label_settings = SubResource("LabelSettings_d1pca")
+horizontal_alignment = 1
+
+[node name="BTNReaunudar" type="Button" parent="PauseMenu"]
+offset_left = 352.0
+offset_top = 370.0
+offset_right = 606.0
+offset_bottom = 433.0
+theme_override_font_sizes/font_size = 40
+text = "REAUNUDAR"
+
+[node name="BTNMenu" type="Button" parent="PauseMenu"]
+offset_left = 712.0
+offset_top = 372.0
+offset_right = 840.0
+offset_bottom = 435.0
+theme_override_font_sizes/font_size = 40
+text = "MENU"
+
+[connection signal="body_entered" from="GoalLelt" to="." method="_on_goal_lelt_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="." method="_on_goal_right_body_entered"]
+[connection signal="pressed" from="PauseMenu/BTNReaunudar" to="." method="_on_btn_reaunudar_pressed"]
+[connection signal="pressed" from="PauseMenu/BTNMenu" to="." method="_on_btn_menu_pressed"]
